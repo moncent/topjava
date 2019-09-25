@@ -32,7 +32,7 @@ public class UserMealsUtil {
                 .collect(Collectors.groupingBy(meal -> meal.getDateTime().toLocalDate(), Collectors.summarizingInt(UserMeal::getCalories)));
 
         for (UserMeal userMeal : mealList) {
-            if (map.get(userMeal.getDateTime().toLocalDate()).getSum() <= caloriesPerDay) {
+            if (map.get(userMeal.getDateTime().toLocalDate()).getSum() > caloriesPerDay) {
                 list.add(new UserMealWithExceed(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), true));
             }
         }
