@@ -25,12 +25,11 @@ public class UserMealsUtil {
 //        .toLocalTime();
     }
 
-    public static List<UserMealWithExceed>  getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
-        List<UserMealWithExceed> list = new ArrayList<>();
-
+    public static List<UserMealWithExceed> getFilteredWithExceeded(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
         Map<LocalDate, IntSummaryStatistics> map = mealList.stream()
                 .collect(Collectors.groupingBy(meal -> meal.getDateTime().toLocalDate(), Collectors.summarizingInt(UserMeal::getCalories)));
 
+        List<UserMealWithExceed> list = new ArrayList<>();
         for (UserMeal userMeal : mealList) {
             if (map.get(userMeal.getDateTime().toLocalDate()).getSum() > caloriesPerDay) {
                 list.add(new UserMealWithExceed(userMeal.getDateTime(), userMeal.getDescription(), userMeal.getCalories(), true));
@@ -47,5 +46,23 @@ public class UserMealsUtil {
             }
         }
         return list;
+    }
+
+    public static List<UserMealWithExceed> getFilteredWithExceededOptionalOne(List<UserMeal> mealList, LocalTime startTime, LocalTime endTime, int caloriesPerDay) {
+        Map<LocalDate, IntSummaryStatistics> map = mealList.stream()
+                .collect(Collectors.groupingBy(meal -> meal.getDateTime().toLocalDate(), Collectors.summarizingInt(UserMeal::getCalories)));
+
+        List<UserMealWithExceed> result = new ArrayList<>();
+        mealList.stream()
+                .filter(elem -> map.get(elem.getDateTime().toLocalDate()).getSum() > caloriesPerDay)
+                .filter(elem ->
+                            (elem.getDateTime().toLocalTime().equals(startTime)
+                            || elem.getDateTime().toLocalTime().isAfter(startTime))
+                        &&
+                            (elem.getDateTime().toLocalTime().equals(endTime)
+                            || elem.getDateTime().toLocalTime().isBefore(endTime)))
+                .map(elem -> result.add(new UserMealWithExceed(elem.getDateTime(), elem.getDescription(), elem.getCalories(), true)))
+                .collect(Collectors.toList());
+        return result;
     }
 }
