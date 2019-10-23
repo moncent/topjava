@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
 
-    private static AtomicInteger counter = new AtomicInteger(0);
+    private static AtomicInteger counter = new AtomicInteger(100000);
 
     Map<Integer, T> map = new ConcurrentHashMap<>();
 
