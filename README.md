@@ -19,6 +19,27 @@ Java Enterprise Online Project
 ### <a href="https://github.com/JavaOPs/topjava/wiki">Требования к участникам, Wiki</a>
 ### <a href="cv.md">Составление резюме, подготовка к интервью, поиск работы</a>
 
+___
+#####REST-запросы по позиции "Еда":  
+- __get:__  
+```curl "http://localhost:8080/topjava/rest/meals"```  
+
+- __get {id}:__  
+```curl "http://localhost:8080/topjava/rest/meals/100008"```  
+
+- __getWithFilter {startDate, endDate, startTime, endTime}:__  
+```curl "http://localhost:8080/topjava/rest/meals/filter?startDate=2015-05-30&endDate=&startTime=20:00&endTime="```  
+
+- __create:__  
+```curl -H "Content-Type: application/json" -d '{"id":null,"dateTime":"2017-06-01T19:00","description":"Поздний ужин","calories":400}' http://localhost:8080/topjava/rest/meals```  
+
+- __update {id}:__  
+```curl -H "Content-Type: application/json" --request PUT --data '{"id":100022,"dateTime":"2017-06-01T19:00:00","description":"Поздний ужин","calories":600}' http://localhost:8080/topjava/rest/meals/100022```  
+
+- __delete {id}:__  
+```curl --request DELETE http://localhost:8080/topjava/rest/meals/100022```  
+___  
+
 Вводное занятие (обязательно смотреть все видео)
 ===============
 ## ![video](https://cloud.githubusercontent.com/assets/13649199/13672715/06dbc6ce-e6e7-11e5-81a9-04fbddb9e488.png) 1. <a href="https://drive.google.com/file/d/0B9Ye2auQ_NsFY1ZDNXRCd1NCTG8">Осваиваем Java Enterprise. Трудоустройство. Ответы на вопросы.</a>

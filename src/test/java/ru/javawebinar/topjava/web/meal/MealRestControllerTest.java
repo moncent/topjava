@@ -87,13 +87,24 @@ class MealRestControllerTest extends AbstractControllerTest {
     }
 
     @Test
-    void getBetween() throws Exception {
+    void getBetweenWithAllFilledFields() throws Exception {
         JacksonObjectMapper.getMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "filter?from=2015-05-30T12:00:00" + "&to=2015-05-30T16:00:00"))
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "filter?startDate=2015-05-30&endDate=2015-05-30&startTime=12:00&endTime=16:00"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(contentJson(List.of(MEAL2)));
+        JacksonObjectMapper.getMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES.enabledByDefault());
+    }
+
+    @Test
+    void getBetweenWithSomeNullFields() throws Exception {
+        JacksonObjectMapper.getMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mockMvc.perform(MockMvcRequestBuilders.get(REST_URL + "filter?startDate=2015-05-30&endDate=&startTime=&endTime=12:00"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(contentJson(List.of(MEAL5, MEAL4, MEAL1)));
         JacksonObjectMapper.getMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES.enabledByDefault());
     }
 }
