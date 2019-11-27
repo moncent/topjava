@@ -20,7 +20,7 @@ Java Enterprise Online Project
 ### <a href="cv.md">Составление резюме, подготовка к интервью, поиск работы</a>
 
 ___
-#####REST-запросы по позиции "Еда":  
+REST-запросы по позиции "Еда":  
 - __get:__  
 ```curl "http://localhost:8080/topjava/rest/meals"```  
 
