@@ -15,7 +15,7 @@
 <div class="jumbotron pt-4">
     <div class="container">
         <h3><spring:message code="meal.title"/></h3>
-        <form>
+        <form id="filterForm">
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-lg-2">
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-lg-2"></div>
                     <div class="col-lg-2">
-                        <label for="startTime" class="input-group time"><spring:message code="meal.startTime"/></label>
+                        <label for="startTime" class="input-group date"><spring:message code="meal.startTime"/></label>
                         <input type="text" class="form-control" id="startTime" name="startTime" value="${param.startTime}"/>
                     </div>
                     <div class="col-lg-2">
@@ -36,13 +36,10 @@
                         <input type="text" class="form-control" id="endTime" name="endTime" value="${param.endTime}"/>
                     </div>
                 </div>
-                <div class="form-row">
-
-                </div>
             </div>
             <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary" onclick=""><spring:message code="meal.filter"/></button>
+                    <button type="submit" class="btn btn-primary"><spring:message code="meal.filter"/></button>
                 </div>
             </div>
         </form>
@@ -51,7 +48,6 @@
             <span class="fa fa-plus"></span>
             <spring:message code="meal.add"/>
         </button>
-    <%--    <a href="meals/create"></a>--%>
         <hr>
         <table class="table table-striped" id="datatables">
             <thead>
