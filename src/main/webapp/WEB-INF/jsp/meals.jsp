@@ -28,18 +28,21 @@
                     </div>
                     <div class="col-lg-2"></div>
                     <div class="col-lg-2">
-                        <label for="startTime" class="input-group date"><spring:message code="meal.startTime"/></label>
+                        <label for="startTime" class="input-group date"><spring:message code="meal.startTime"/>:</label>
                         <input type="text" class="form-control" id="startTime" name="startTime" value="${param.startTime}"/>
                     </div>
                     <div class="col-lg-2">
-                        <label for="endTime" class="input-group date"><spring:message code="meal.endTime"/></label>
+                        <label for="endTime" class="input-group date"><spring:message code="meal.endTime"/>:</label>
                         <input type="text" class="form-control" id="endTime" name="endTime" value="${param.endTime}"/>
                     </div>
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-sm-10">
+                <div class="col-sm-3">
                     <button type="submit" class="btn btn-primary"><spring:message code="meal.filter"/></button>
+                </div>
+                <div class="col-sm-3">
+                    <button type="reset" class="btn btn-primary" onclick="resetFilter()"><spring:message code="common.reset"/></button>
                 </div>
             </div>
         </form>

@@ -75,10 +75,9 @@ $(function() {
 
    $('#filterForm').submit(function(e) {
         e.preventDefault();
-        ajaxUrl += "filter";
         $.ajax({
             method: "GET",
-            url: ajaxUrl,
+            url: ajaxUrl + "filter",
             contentType: "application/json",
             dataType:'json',
             data: {
@@ -94,3 +93,16 @@ $(function() {
         });
    });
 });
+
+function resetFilter() {
+    $.ajax({
+        method: "GET",
+        url: ajaxUrl,
+        contentType: "application/json",
+        dataType:'json',
+        cache: true,
+        success: function (data) {
+            context.datatableApi.clear().rows.add(data).draw();
+        }
+    });
+}
