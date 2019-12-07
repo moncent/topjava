@@ -13,6 +13,13 @@ function clearFilter() {
     $.get(mealAjaxUrl, updateTableByData);
 }
 
+function saveWithDateTimeConverter() {
+    var selectorDt = $("#dateTime");
+    var dt = moment(selectorDt.val()).format('Y-MM-DD[T]HH:mm:ss');
+    selectorDt.val(dt);
+    save();
+}
+
 $(function () {
     makeEditable({
         ajaxUrl: mealAjaxUrl,
@@ -27,11 +34,9 @@ $(function () {
                 {
                     "data": "dateTime",
                     "render": function (data, type, row) {
-                        var dateSplit = data.split('T');
-                        var timeSplit = dateSplit[1].split(':');
-
                         if (type === "display") {
-                            return dateSplit[0] + " " + timeSplit[0] + ":" + timeSplit[1];
+                            var dt = moment(data).format('Y-MM-DD HH:mm');
+                            return dt;
                         }
                         return data;
                     }
@@ -64,5 +69,28 @@ $(function () {
             }
         }),
         updateTable: updateFilteredTable
+    });
+    $('#dateTime').datetimepicker({
+        format: 'Y\-m\-d H:i'
+    });
+
+    $('#startDate').datetimepicker({
+        timepicker: false,
+        format: 'Y\-m\-d'
+    });
+
+    $('#endDate').datetimepicker({
+        timepicker: false,
+        format: 'Y\-m\-d'
+    });
+
+    $('#startTime').datetimepicker({
+        datepicker: false,
+        format: 'H:i'
+    });
+
+    $('#endTime').datetimepicker({
+        datepicker: false,
+        format: 'H:i'
     });
 });

@@ -20,6 +20,10 @@ function add() {
 function updateRow(id) {
     $("#modalTitle").html(i18n["editTitle"]);
     $.get(context.ajaxUrl + id, function (data) {
+        if (data.dateTime != null) {
+            var dt = moment(data.dateTime).format('Y-MM-DD HH:mm');
+            data.dateTime = dt;
+        }
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
         });
