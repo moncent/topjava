@@ -33,6 +33,10 @@ public class MealTestData {
         return new Meal(MEAL1_ID, MEAL1.getDateTime(), "Обновленный завтрак", 200);
     }
 
+    public static Meal getInvalidUpdated() {
+        return new Meal(MEAL1_ID, MEAL1.getDateTime(), null, 200);
+    }
+
     public static TestMatchers<Meal> MEAL_MATCHERS = TestMatchers.useFieldsComparator(Meal.class, "user");
     public static TestMatchers<MealTo> MEAL_TO_MATCHERS = TestMatchers.useEquals(MealTo.class);
 }

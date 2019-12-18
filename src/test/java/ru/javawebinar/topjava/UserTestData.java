@@ -22,6 +22,15 @@ public class UserTestData {
     public static User getUpdated() {
         User updated = new User(USER);
         updated.setName("UpdatedName");
+        updated.setPassword("newPassword");
+        updated.setCaloriesPerDay(330);
+        updated.setRoles(Collections.singletonList(Role.ROLE_ADMIN));
+        return updated;
+    }
+
+    public static User getInvalidUpdated() {
+        User updated = new User(USER);
+        updated.setName(null);
         updated.setCaloriesPerDay(330);
         updated.setRoles(Collections.singletonList(Role.ROLE_ADMIN));
         return updated;
